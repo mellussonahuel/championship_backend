@@ -1,10 +1,23 @@
 import { Exclude } from 'class-transformer';
-import { Table, Column, Model, DataType, AllowNull, Unique, Default, CreatedAt, UpdatedAt, DeletedAt, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  AllowNull,
+  Unique,
+  Default,
+  CreatedAt,
+  UpdatedAt,
+  DeletedAt,
+  PrimaryKey,
+  AutoIncrement,
+} from 'sequelize-typescript';
 
 @Table({
   tableName: 'users', // Especificar el nombre de la tabla
-  timestamps: true,   // Habilitar timestamps para createdAt y updatedAt
-  paranoid: true,     // Habilitar soft deletes
+  timestamps: true, // Habilitar timestamps para createdAt y updatedAt
+  paranoid: true, // Habilitar soft deletes
   indexes: [
     {
       unique: true,
@@ -50,12 +63,19 @@ export class User extends Model {
   @Exclude()
   password: string;
 
-  @Default(false) // Establece un valor predeterminado
+  @Default(false)
   @AllowNull(false)
   @Column({
     type: DataType.BOOLEAN,
   })
   isAdmin: boolean;
+
+  @Default(false)
+  @AllowNull(false)
+  @Column({
+    type: DataType.BOOLEAN,
+  })
+  isEmailVerified: boolean;
 
   @CreatedAt
   @Column({
